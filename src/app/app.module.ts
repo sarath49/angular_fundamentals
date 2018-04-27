@@ -1,18 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-
+import { GitSearchService } from './git-search.service';
+import { GitSearchUsersService } from './git-search-users.service';
+import { GitSearchComponent } from './git-search/git-search.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GitSearchComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [GitSearchService, GitSearchUsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

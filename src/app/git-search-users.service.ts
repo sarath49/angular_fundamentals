@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import { GitSearch } from './git-search';
+import { GitSearchUsers } from './git-search-users';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class GitSearchService {
+export class GitSearchUsersService {
   cachedValues: Array<{
-    [query: string]: GitSearch
+    [query: string]: GitSearchUsers
   }> = [];
-  
   constructor(private http: HttpClient) {
     this.http = http;
   }
 
-  gitSearch = (query: string): Promise<GitSearch> => {
-    let promise = new Promise<GitSearch>((resolve, reject) => {
+  gitSearchUsers = (query: string): Promise<GitSearchUsers> => {
+    let promise = new Promise<GitSearchUsers>((resolve, reject) => {
       if(this.cachedValues[query]) {
         resolve(this.cachedValues[query])
       }
       else {
-        this.http.get('https://api.github.com/search/repositories?q=' + query)
+        this.http.get('https://api.github.com/search/users?q=' + query)
         .toPromise()
         .then( (response) => {
-          resolve(response as GitSearch)
+          resolve(response as GitSearchUsers)
         }, (error) => {
           reject(error);
         })
@@ -30,4 +29,5 @@ export class GitSearchService {
     })
     return promise;
   }
+
 }
