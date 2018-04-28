@@ -13,12 +13,6 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.GitSearchService.gitSearch('angular').then((response) => {
-     console.log(response);
-       alert('Total libraires found: ' + response.total_count)
-    }, (error) => {
-      alert("Error: " + error.statusText);
-    });
 
     this.GitSearchUsersService.gitSearchUsers('sarath49').then((response) => {
       console.log(response);

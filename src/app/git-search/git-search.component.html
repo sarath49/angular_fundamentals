@@ -1,3 +1,25 @@
-<p>
-  git-search works!
-</p>
+<div *ngIf="searchResults; else elseBlock">
+    <h3 class="total">Total Results: {{searchResults.total_count}}</h3>
+    <ul class="list">
+        <li [ngStyle]="{'background-color' : (i % 2 === 0) ? 'silver' : 'white'}"  class="list_item" *ngFor="let result of searchResults.items; index as i;" >
+          <a [href]="result.html_url">
+            <img class="avatar" [src]="result.owner.avatar_url" /> 
+            <h4 class="title">{{result.name | uppercase}} 
+              <small> by {{result.owner.login}}</small> 
+            </h4>
+          </a> 
+          <p class="description"> {{result.description}}</p>
+          <p> Created On: {{result.created_at | date:'fullDate'}} </p> 
+        </li>
+    </ul>
+</div>
+<ng-template #elseBlock>
+    <content-loader>
+        <svg:rect x="0" y="0" rx="3" ry="3" width="250" height="10" />
+        <svg:rect x="20" y="20" rx="3" ry="3" width="220" height="10" />
+        <svg:rect x="20" y="40" rx="3" ry="3" width="170" height="10" />
+        <svg:rect x="0" y="60" rx="3" ry="3" width="250" height="10" />
+        <svg:rect x="20" y="80" rx="3" ry="3" width="200" height="10" />
+        <svg:rect x="20" y="100" rx="3" ry="3" width="80" height="10" />
+      </content-loader>
+</ng-template>
